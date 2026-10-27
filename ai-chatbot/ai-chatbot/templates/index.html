@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AI Chatbot</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <div class="app">
+    <header class="app-header">
+      <div class="brand">
+        <span class="logo" aria-hidden="true">🤖</span>
+        <div>
+          <h1>AI Chatbot</h1>
+          <p class="subtitle">Ask me anything</p>
+        </div>
+      </div>
+      <div class="header-actions">
+        {% if mock_mode %}<span class="badge">Demo mode</span>{% endif %}
+        {% if dashboard_enabled %}<a class="btn-secondary" href="{{ url_for('dashboard') }}">Dashboard</a>{% endif %}
+        <button id="clear-btn" class="btn-secondary" type="button">Clear chat</button>
+      </div>
+    </header>
+
+    <!-- script.js adds messages here -->
+    <main id="chat-window" class="chat-window" aria-live="polite"></main>
+
+    <form id="chat-form" class="input-bar" autocomplete="off">
+      <textarea id="user-input" rows="1" maxlength="2000"
+                placeholder="Type your message..." aria-label="Your message"></textarea>
+      <button id="send-btn" type="submit">Send</button>
+    </form>
+  </div>
+  <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>

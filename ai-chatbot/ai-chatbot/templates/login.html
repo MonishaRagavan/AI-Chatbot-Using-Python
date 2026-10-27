@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Dashboard login</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='dashboard.css') }}">
+</head>
+<body class="login-page">
+  <main class="login-box">
+    <h1>Dashboard login</h1>
+    {% if disabled %}
+      <p class="notice">The dashboard is turned off. Set <code>DASHBOARD_PASSWORD</code> in your
+      <code>.env</code> file, restart the server, then come back.</p>
+    {% else %}
+      {% if error %}<p class="notice error" role="alert">{{ error }}</p>{% endif %}
+      <form method="post">
+        <label for="password">Password</label>
+        <input id="password" name="password" type="password" required autofocus autocomplete="current-password">
+        <button type="submit">Log in</button>
+      </form>
+    {% endif %}
+    <a class="back" href="{{ url_for('index') }}">Back to chat</a>
+  </main>
+</body>
+</html>

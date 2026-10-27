@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Chatbot dashboard</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='dashboard.css') }}">
+</head>
+<body>
+  <header class="top">
+    <div>
+      <h1>Chatbot dashboard</h1>
+      <p id="status" class="muted">Loading...</p>
+    </div>
+    <div class="top-actions">
+      <span id="mode" class="pill"></span>
+      <a class="link-btn" href="{{ url_for('index') }}">Open chat</a>
+      <form method="post" action="{{ url_for('logout') }}"><button class="link-btn" type="submit">Log out</button></form>
+    </div>
+  </header>
+
+  <main>
+    <section class="strip" aria-label="Totals">
+      <div><span id="s-total" class="num">–</span><span class="lbl">Chats in total</span></div>
+      <div><span id="s-today" class="num">–</span><span class="lbl">Chats today (UTC)</span></div>
+      <div><span id="s-rate" class="num">–</span><span class="lbl">Answered successfully</span></div>
+      <div><span id="s-avg" class="num">–</span><span class="lbl">Average answer time</span></div>
+      <div><span id="s-err" class="num">–</span><span class="lbl">Failed chats</span></div>
+    </section>
+
+    <div class="grid">
+      <section class="panel">
+        <h2>Chats per day, last 7 days</h2>
+        <div id="chart" class="chart" role="img" aria-label="Bar chart of chats per day"></div>
+        <p class="legend"><span class="key ok"></span>Answered <span class="key bad"></span>Failed</p>
+      </section>
+      <section class="panel">
+        <h2>Most common errors</h2>
+        <ul id="errors" class="errors"></ul>
+      </section>
+    </div>
+
+    <section class="panel">
+      <h2>Latest conversations</h2>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Time</th><th>Result</th><th>User asked</th><th>Reply or error</th><th>Took</th></tr></thead>
+          <tbody id="recent"></tbody>
+        </table>
+      </div>
+      <p id="empty" class="empty" hidden>No chats yet. Send a message on the chat page and it will appear here.</p>
+    </section>
+  </main>
+  <script src="{{ url_for('static', filename='dashboard.js') }}"></script>
+</body>
+</html>
